@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Users, Music, Utensils, MapPin, PartyPopper, Plus, Trash2 } from 'lucide-react';
+import Header from './components/Header';
 
 interface Task {
   id: number;
@@ -32,7 +33,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <Header />
+      <div className="max-w-6xl mx-auto px-4 py-12 pt-24">
         <header className="text-center mb-16">
           <div className="flex justify-center mb-4">
             <PartyPopper className="h-16 w-16 text-purple-600" />
