@@ -47,7 +47,7 @@ function App() {
           <section className="bg-white rounded-2xl shadow-xl p-8">
             <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
               <Calendar className="text-purple-600" />
-              Event Details
+              Event Details here
             </h2>
             
             <div className="space-y-6">
