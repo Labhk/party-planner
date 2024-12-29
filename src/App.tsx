@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Features from './components/Features';
 import Footer from './components/Footer';
 
-function App() {
+export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
       <Header />

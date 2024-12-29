@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
               <span className="ml-2 text-xl font-bold">Party Perfect</span>
             </div>
             <p className="text-purple-200">
-              Making your events extraordinary, one celebration at a time.
+              one celebration at a time.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-purple-200 hover:text-white transition-colors">

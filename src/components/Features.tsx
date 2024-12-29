@@ -15,7 +15,7 @@ const features = [
   {
     icon: Utensils,
     title: 'Catering Solutions',
-    description: 'Curate perfect menus and manage dietary restrictions with ease'
+    description: 'Curate perfect menus and manage dietary restrictions with ease Curate perfect menus and manage dietary restrictions with ease'
   },
   {
     icon: MapPin,
