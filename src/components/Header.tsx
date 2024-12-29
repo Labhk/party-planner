@@ -13,6 +13,31 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (isMenuOpen && !target.closest('nav')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const menuItems = [
     { label: 'Home', href: '#' },
     { label: 'Events', href: '#' },
@@ -62,7 +87,10 @@ const Header = () => {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMenuOpen(!isMenuOpen);
+              }}
               className="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-purple-600 hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200"
               aria-expanded={isMenuOpen}
               aria-label="Toggle menu"
@@ -78,24 +106,23 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          className={`md:hidden fixed inset-0 top-20 bg-white/95 backdrop-blur-sm transition-all duration-300 ease-in-out ${
+            isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
+          onClick={() => setIsMenuOpen(false)}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-4 py-6 space-y-4">
             {menuItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="block px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-3 rounded-lg text-base font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition-colors duration-200"
               >
                 {item.label}
               </a>
             ))}
             <button 
-              className="w-full mt-2 bg-purple-600 text-white px-4 py-3 rounded-lg text-base font-medium hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-              onClick={() => setIsMenuOpen(false)}
+              className="w-full mt-4 bg-purple-600 text-white px-6 py-3 rounded-lg text-base font-medium hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
             >
               Get Started
             </button>
